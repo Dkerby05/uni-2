@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+public class UniversityCourseTracker {
+    public static void main(String[] args) {
+        // 1D array to store the names of 5 students.
+        String[] studentNames = {"Alice", "Bob", "Charlie", "David", "Eve"};
+        
+        // 2D array to store the grades of each student in 3 subjects.
+        // Each row represents a student, and each column represents a subject.
+        double[][] grades = {
+            {85.5, 90.0, 88.0},  // Alice's grades in 3 subjects
+            {78.0, 84.5, 79.0},  // Bob's grades in 3 subjects
+            {92.0, 95.5, 91.0},  // Charlie's grades in 3 subjects
+            {65.0, 70.0, 68.5},  // David's grades in 3 subjects
+            {88.0, 91.0, 89.5}   // Eve's grades in 3 subjects
+        };
+
+        // Loop through each student to calculate and display their average grade
+        for (int i = 0; i < studentNames.length; i++) {
+            double[] studentGrades = grades[i];  // Get grades for the current student
+            double totalGrades = 0;
+            
+            // Loop through each subject for the current student to calculate total grades
+            for (int j = 0; j < studentGrades.length; j++) {
+                totalGrades += studentGrades[j];  // Add the grade for each subject
+            }
+
+            // Calculate the average grade for the current student
+            double averageGrade = totalGrades / studentGrades.length;
+            
+            // Display the student's name and their average grade
+            System.out.printf("%s's average grade: %.2f%n", studentNames[i], averageGrade);
+        }
+
+        // Optional: Allow user to add a new student
+        Scanner scanner = new Scanner(System.in);  // Create a scanner object for user input
+        System.out.println("\nWould you like to add a new student? (yes/no): ");
+        String response = scanner.nextLine();  // Read user response
+
+        if (response.equalsIgnoreCase("yes")) {
+            // If user wants to add a new student, prompt for the student's name
+            System.out.print("Enter student's name: ");
+            String newName = scanner.nextLine();
+
+            // Create an array to store grades for the new student (assuming 3 subjects)
+            double[] newGrades = new double[3];  
+            for (int i = 0; i < newGrades.length; i++) {
+                System.out.printf("Enter grade for subject %d: ", i + 1);
+                newGrades[i] = scanner.nextDouble();  // Collect grade for each subject
+            }
+
+            // Display confirmation message (Note: In a real application, the new student would be added to the arrays)
+            System.out.println("Student " + newName + " added successfully with grades.");
+        }
+
+        // Close the scanner to prevent resource leaks
+        scanner.close();
+    }
+}
